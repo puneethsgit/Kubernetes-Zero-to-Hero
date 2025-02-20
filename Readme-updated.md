@@ -97,7 +97,7 @@ kops create cluster --name=puneethk8cluster.k8s.local \
 kops edit cluster demok8scluster.k8s.local
 ```
 
-### Step 3: Build the Cluster
+### Step 3: Build the Cluster After creating the cluster definition, you need to apply the changes: (CHARGES WILL APPLY DONT USE ON FREE TIER)
 ```sh
 kops update cluster demok8scluster.k8s.local --yes --state=s3://kops-your-storage-bucket
 ```
