@@ -70,6 +70,28 @@ kops create cluster \
 --master-volume-size=8 \
 --node-volume-size=8
 ```
+
+Your `kops create cluster` command includes deprecated flags. Here's the corrected version using the updated flags:  
+
+### **Fixed Command:**  
+```sh
+kops create cluster --name=puneethk8cluster.k8s.local \
+  --state=s3://kops-puneeth-storage \
+  --zones=us-east-1a \
+  --node-count=1 \
+  --node-size=t2.micro \
+  --control-plane-size=t2.micro \
+  --control-plane-volume-size=8 \
+  --node-volume-size=8
+```
+
+### **Key Fixes:**  
+✅ Replaced `--master-size` with `--control-plane-size`  
+✅ Replaced `--master-volume-size` with `--control-plane-volume-size`  
+✅ The warning about Gossip being deprecated means you should configure DNS properly (e.g., Route 53) instead of relying on the default Gossip-based DNS.  
+
+
+
 **Important:** Edit the cluster configuration if necessary, as some resources may exceed the AWS Free Tier limits.
 ```sh
 kops edit cluster demok8scluster.k8s.local
