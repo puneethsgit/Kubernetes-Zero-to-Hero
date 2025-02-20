@@ -108,5 +108,20 @@ This process may take a few minutes.
 kops validate cluster --state=s3://kops-your-storage-bucket
 ```
 
+#### To See all cluster
+```sh
+aws s3 ls
+```
+To see all clusters managed by `kops`, use the following command:  
+
+```sh
+kops get cluster --state=s3://kops-abhi-storage
+```
+
+TO delete cluster
+```sh
+kops delete cluster --name=xxk8scluster.k8s.local --state=s3://kops-xxx-storage --yes
+```
+
 Your Kubernetes cluster should now be up and running! 🎉
 
