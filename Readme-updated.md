@@ -122,6 +122,26 @@ TO delete cluster
 ```sh
 kops delete cluster --name=xxk8scluster.k8s.local --state=s3://kops-xxx-storage --yes
 ```
+To delete an S3 bucket, follow these steps:  
 
+### **1. Empty the Bucket** (Required before deletion)
+```sh
+aws s3 rm s3://kops-abhi-storage --recursive
+```
+This removes all objects in the bucket.
+
+### **2. Delete the Bucket**
+```sh
+aws s3 rb s3://kops-abhi-storage --force
+```
+The `--force` flag ensures the bucket is removed after emptying.
+
+#### **Alternative: If You Want to Manually Confirm Deletion**
+Instead of `--force`, you can delete the bucket manually from the AWS Console:  
+1. Go to **AWS S3 Console** → [S3 Buckets](https://s3.console.aws.amazon.com/s3).
+2. Find **`kops-abhi-storage`**.
+3. Empty the bucket → Delete the bucket.
+
+Let me know if you face any issues! 🚀
 Your Kubernetes cluster should now be up and running! 🎉
 
