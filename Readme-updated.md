@@ -144,7 +144,7 @@ Instead of `--force`, you can delete the bucket manually from the AWS Console:
 
 -------------------------------------------------
 
-# Kubernetes Setup and Running a Pod
+# Kubernetes Setup and Running a Pod Using Minikube
 
 ## Prerequisites
 Ensure you have the following before proceeding:
