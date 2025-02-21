@@ -142,6 +142,126 @@ Instead of `--force`, you can delete the bucket manually from the AWS Console:
 2. Find **`kops-abhi-storage`**.
 3. Empty the bucket → Delete the bucket.
 
-Let me know if you face any issues! 🚀
-Your Kubernetes cluster should now be up and running! 🎉
+-------------------------------------------------
+
+# Kubernetes Setup and Running a Pod
+
+## Prerequisites
+Ensure you have the following before proceeding:
+- A Linux or macOS system (Windows users can use WSL2 or Minikube)
+- A user with sudo privileges
+- Internet connection
+
+---
+
+## Step 1: Install Kubernetes (Minikube) and `kubectl`
+
+### Install Minikube (For Local Kubernetes Cluster)
+```sh
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
+### Verify Installation
+```sh
+minikube version
+```
+
+### Install `kubectl` (Kubernetes CLI)
+```sh
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
+
+### Verify Installation
+```sh
+kubectl version --client
+```
+
+---
+
+## Step 2: Start Kubernetes Cluster with Minikube
+```sh
+minikube start
+```
+**Explanation:** This command starts a local Kubernetes cluster using Minikube.
+
+### Verify Cluster is Running
+```sh
+kubectl get nodes
+```
+**Explanation:** This checks if Kubernetes nodes are up and running.
+
+---
+
+## Step 3: Deploy a Pod
+### Create a Simple Pod Manifest (YAML File)
+Create a file named `pod.yaml` with the following content:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+```
+
+### Apply the Pod Configuration
+```sh
+kubectl apply -f pod.yaml
+```
+**Explanation:** This command deploys the pod to the Kubernetes cluster.
+
+### Verify Pod is Running
+```sh
+kubectl get pods
+```
+**Explanation:** Lists all running pods and their statuses.
+
+---
+
+## Step 4: Access the Pod
+### Get Pod Logs
+```sh
+kubectl logs my-pod
+```
+**Explanation:** Retrieves logs from the pod to debug and monitor application output.
+
+### Execute a Command Inside the Pod
+```sh
+kubectl exec -it my-pod -- /bin/sh
+```
+**Explanation:** Opens a shell inside the running pod.
+
+---
+
+## Step 5: Clean Up
+### Delete the Pod
+```sh
+kubectl delete pod my-pod
+```
+**Explanation:** Removes the deployed pod from the Kubernetes cluster.
+
+### Stop Minikube (if needed)
+```sh
+minikube stop
+```
+**Explanation:** Stops the Minikube cluster.
+
+### Delete Minikube Cluster (if needed)
+```sh
+minikube delete
+```
+**Explanation:** Completely removes the Minikube Kubernetes cluster from your system.
+
+---
+
+## Conclusion
+You have successfully installed Kubernetes, set up `kubectl`, deployed a simple pod, and accessed it. Kubernetes is powerful for container orchestration, and this guide serves as a foundational setup.
+
+
 
