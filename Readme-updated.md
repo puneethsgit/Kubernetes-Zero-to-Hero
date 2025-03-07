@@ -206,6 +206,55 @@ Instead of `--force`, you can delete the bucket manually from the AWS Console:
 
 Let me know if you need more details! 😊
 
+### **Cost Difference: Kops vs. EKS**  
+
+Yes, you're right! **With Kops, you only pay for the resources**, but **with EKS, you pay for both the resources and the EKS control plane**.
+
+---
+
+### **1️⃣ Kops (Kubernetes Operations) - Cost**  
+- **Kops is free** (open-source tool).  
+- You **only pay for the AWS resources** used:  
+  ✅ **EC2 instances** (for control plane & worker nodes)  
+  ✅ **EBS volumes** (for storage)  
+  ✅ **ELB (Load Balancer)**  
+  ✅ **S3** (for storing cluster state)  
+  ✅ **Networking costs** (VPC, NAT, etc.)  
+
+🔹 **No extra charge for Kubernetes control plane** (you run & manage it yourself).  
+🔹 **More effort** required to manage, update, and secure the cluster.  
+
+---
+
+### **2️⃣ EKS (Elastic Kubernetes Service) - Cost**  
+- **EKS charges you for both**:  
+  ✅ **EKS control plane** → **$0.10 per hour per cluster** (~$72/month).  
+  ✅ **AWS resources** (same as Kops): EC2, EBS, ELB, S3, networking, etc.  
+- If you use **Fargate (serverless nodes)** instead of EC2, you **only pay for running pods** (no need to manage worker nodes).  
+
+🔹 **Easier to manage** (AWS handles control plane, HA, and security).  
+🔹 **More expensive** than Kops because of the control plane fee.  
+
+---
+
+### **3️⃣ Cost Comparison Example**  
+| Feature  | **Kops (Self-Managed)** | **EKS (AWS Managed)** |
+|----------|----------------|----------------|
+| **Control Plane Cost** | **$0** (you manage it) | **$0.10/hour** ($72/month) |
+| **Worker Nodes (EC2, EBS, etc.)** | ✅ Yes (same as EKS) | ✅ Yes (same as Kops) |
+| **Load Balancers** | ✅ Yes | ✅ Yes |
+| **S3 for State Storage** | ✅ Yes | ❌ No (AWS manages control plane) |
+| **Networking (VPC, NAT, etc.)** | ✅ Yes | ✅ Yes |
+| **Overall Cost** | **Cheaper, but more effort** | **More expensive, but easier to manage** |
+
+---
+
+### **4️⃣ Which One Should You Choose?**
+- **Choose Kops** → If you want **full control and lower costs**, and are okay with managing everything.  
+- **Choose EKS** → If you want **AWS to handle the Kubernetes control plane**, and are okay with paying extra for **convenience & managed services**.  
+
+Let me know if you need more details! 🚀
+
 # Kubernetes Setup and Running a Pod Using Minikube
 
 ## Prerequisites
